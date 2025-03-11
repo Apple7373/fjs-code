@@ -14,7 +14,8 @@ int main()
         if (sum == i) e.push_back(i);
         else if (sum > i) g.push_back(i);
     }
-
+// sdfafasdfsadfsf
+// asdfjsadfasjfasdfasdfkls
     cout << "E:";
     for (auto it : e) {
         cout << it << ' ';
