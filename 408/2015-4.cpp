@@ -21,12 +21,7 @@ int main()
 		for (int j = 1; j < strlen(b); j++) {
 			if (a[i] == b[j]) {
 				d[i][j] = d[i-1][j-1] + 1;
-				if (d[i][j] > max) {
-					max = d[i][j];
-					cnt = 1;
-				} else if (d[i][j] == max) cnt++;
 			}
-				
 		}	
 	}
 
