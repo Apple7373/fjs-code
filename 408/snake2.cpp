@@ -1,35 +1,34 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int a[100][100];
+int a[1000][1000];
+int n;
 int main()
-{
+{    
     int n;
     cin >> n;
-    int cnt = 0;
-    int flag = true;
+    int cnt = 1;
+    // 先填充前n斜线 
+    bool flag = true; // true表示左下到右上  false 表示右上到左下
     for (int k = 0; k < n; k++) {
-        if (!flag) {  // false 从右上到左下
-            for (int i = 0, j = k; i <= k; i++, j--) a[i][j] = ++cnt;
-            flag = true;
-        }
-        else if (flag) { // true 从左下到右上
-            for (int j = 0, i = k; j <= k; j++, i--) a[i][j] = ++cnt;
+        if (flag) {
+            for (int i = k, j = 0; i >= 0; i--,j++) a[i][j] = cnt++;
             flag = false;
+        } else {
+            for (int i = 0, j = k; i <= k; i++, j--) a[i][j] = cnt++;
+            flag = true;
         }
     }
 
-    int beg = 1;
+    // 接下来输出下三角
     for (int k = n; k < 2*n-1; k++) {
         if (flag) {
-            for (int j = beg, i = k-j; j < n; j++, i--) a[i][j] = ++cnt;
-            flag = false;
-        } else if (!flag) {
-            for (int i = beg, j = k-i; i < n; i++,j--) a[i][j] = ++cnt;
+            for (int i = n-1, j = k-i; j <= n-1; i--, j++) a[i][j] = cnt++;
+            flag = false;    
+        } else {
+            for (int j = n-1, i = k-j; i <= n-1; i++, j--) a[i][j] = cnt++;
             flag = true;
         }
-        beg++;
     }
 
     for (int i = 0; i < n; i++) {
@@ -37,4 +36,5 @@ int main()
             cout << a[i][j] << '\t';
         cout << endl;
     }
+    return 0;
 }

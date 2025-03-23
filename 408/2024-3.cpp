@@ -1,59 +1,57 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-
-bool check(char ch) {
-    if (ch == '{' || ch == '}' || ch == '[' ||
-        ch == ']' || ch == '(' || ch == ')' ||
-        ch >= '0' && ch <= '9' || ch == '+' ||
-        ch == '-' || ch == ' ')
-        return true;
-    else return false;
-}
+ // 
 int main()
 {
     string s;
     getline(cin, s);
-    // cin >> s;
-    stack<char> st;
+
     vector<char> ans;
-    bool flag = true;
     for (int i = 0; i < s.size(); i++) {
-        if (check(s[i])) {
-            if (s[i] == '{' || s[i] == '[' || s[i] == '(') {
-                st.push(s[i]);
-                ans.push_back(s[i]);
-            } else if ((s[i] == '}' || s[i] == ')' ||s[i] == ']' ) && st.size() == 0){
-                flag = false;
-                ans.push_back(s[i]);
-            } 
-            else if (s[i] == '}' && st.size() > 0) {
-                ans.push_back(s[i]);
-                char t = st.top();
-                st.pop();
-                if (t != '{') flag = false; 
-            } else if (s[i] == ']'  && st.size() > 0) {
-                ans.push_back(s[i]);
-                char t = st.top();
-                st.pop();
-                if (t != '[') flag = false; 
-            } else if (s[i] == ')'  && st.size() > 0) {
-                ans.push_back(s[i]);
-                char t = st.top();
-                st.pop();
-                if (t != '(') flag = false; 
+        if (s[i] == '{' || s[i] == '}' || s[i] == '[' || s[i] == ']' || s[i] == '(' || s[i] == ')' || 
+            s[i] >= '0' && s[i] <= '9' || s[i] == '-' || s[i] == '+' || s[i] == ' ') {
+                // 输入符合要求
+                if (s[i] == '{' || s[i] == '}' || s[i] == '[' || s[i] == ']' || s[i] == '(' || s[i] == ')') 
+                    ans.push_back(s[i]);
+            } else {
+                cout << "input error" << endl;
+                return 0;
             }
-        } else {
-            cout << "input error" << endl;
-            return 0;
+    }
+
+    stack<char> st;
+    bool flag = true;
+    for (int i = 0; i < ans.size(); i++) {
+        if (ans[i] == '{' || ans[i] == '(' || ans[i] == '[') st.push(ans[i]);
+        else if(ans[i] == '}') {
+            if (st.size() > 0 && st.top() == '{') st.pop();
+            else {
+                flag = false;
+                break;
+            }
+        } else if (ans[i] == ']') {
+            if (st.size() > 0 && st.top() == '[') st.pop();
+            else {
+                flag = false;
+                break;
+            }
+        } else if (ans[i] == ')') {
+            if (st.size() > 0 && st.top() == '(') st.pop();
+            else {
+                flag = false;
+                break;
+            }
         }
     }
 
-    if (flag ) {
-        cout << "yes" << ' ';
-    } else cout << "no" << ' ';
-    
-    for (auto it : ans) cout << it;
+    if (flag) cout << "yes ";
+    else cout << "no ";
+
+    for (auto i : ans) {
+        cout << i;
+    }
     cout << endl;
 
+    return 0;
 }

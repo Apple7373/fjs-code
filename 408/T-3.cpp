@@ -1,5 +1,15 @@
 #include <bits/stdc++.h>
 
+/*
+定义移位操作，shift(str,x)代表将str中的前x位移到后面，例如shift("ABCD",2)得到CDAB。
+输入一个长度为n的字符串最多进行n次移位操作后，输出有几次得到的字符串与原字符串相同。
+输入:
+byebye
+hello
+输出
+2
+1 
+*/
 using namespace std;
 
 

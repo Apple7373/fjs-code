@@ -1,39 +1,51 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+struct TreeNode{
+    char val;
+    TreeNode* left;
+    TreeNode* right;
 
-struct Student {
-    char cno[3]; //课程编号
-    double avg;  //平均成绩
-    char sno[3]; //学生编号  地址大
-    // double avg;  //平均成绩
-};
-vector<Student> v;
-
-bool cmp(Student a, Student b) {
-    if (strcmp(a.cno, b.cno) == 0) {
-        return a.avg > b.avg;
+    TreeNode(char c) {
+        val = c;
+        left = nullptr;
+        right = nullptr;
     }
-    return strcmp(a.cno, b.cno) < 0;
-    // return a.cno < b.cno;
+};
+int i = 0;
+
+TreeNode* dfs(string s) {
+    if (s[i] == '#' || i >= s.size()) return nullptr;
+    TreeNode* cur = new TreeNode(s[i]);
+    i++;
+    cur->left = dfs(s);
+    i++;
+    cur->right = dfs(s);
+    return cur;
+}
+
+void inorder(TreeNode* root) {
+    if (root == nullptr) return;
+    inorder(root->left);
+    cout << root->val;
+    inorder(root->right);
+}
+
+void postorder(TreeNode* root) {
+    if (root == nullptr) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->val;
 }
 int main()
 {
-    char ch[3];
-    while (cin >> ch) {
-        if (ch[0] == '\\') break;
-        Student s;
-        strcpy(s.cno, ch);
-        cin >> ch;
-        strcpy(s.sno, ch);
-        cin >> s.avg;
-        v.push_back(s);
-    }
-    sort(v.begin(), v.end(), cmp);
-    cout << "cno\tsno\tavg\n"; 
+    string s;
+    cin >> s;
+    
+    TreeNode* root = dfs(s); // 构建树
 
-    for (auto it : v) {
-        cout << it.cno << "\t" << it.sno << "\t" << it.avg << endl;
-    }
+    inorder(root);
+    cout << endl;
+    postorder(root);
     return 0;
 }

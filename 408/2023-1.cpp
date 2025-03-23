@@ -26,6 +26,7 @@ int main()
 			cout << a[i][j];
 		cout << endl;
 	}
+
 	for (int i = n-2; i >= 0; i--) {
 		for (int j = 0; j < 10; j ++) 
 			cout << a[i][j];

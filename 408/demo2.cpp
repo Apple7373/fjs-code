@@ -34,15 +34,6 @@ void postorder(TreeNode* root) {
 }
 int main()
 {
-    cin >> s;
-    int idx = 0;
-    TreeNode* root = dfs(idx);
-
-    cout << "中序："; 
-    inorder(root);
-    cout << endl;
-    cout << "后序：" ;
-    postorder(root);
-    cout << endl;
+    cout << (int)'z' << endl;
 
 }

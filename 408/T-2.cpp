@@ -1,8 +1,12 @@
 #include <bits/stdc++.h>
+/*
+这道题就是2020-1  墨滴扩散
 
+*/
 using namespace std;
 int dx[4] = {-1,0,1,0};
 int dy[4] = {0,1,0,-1};
+
 int main()
 {
     int m, n;

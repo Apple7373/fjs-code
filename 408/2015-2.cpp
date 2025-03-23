@@ -33,3 +33,51 @@ int main()
     }
     cout << ans.size() << endl;
 }
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n;
+class Solution {
+public:
+    vector<vector<int>> ans;
+    vector<int> cur;
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<bool> st(nums.size(), false);
+        backtrack(nums, st);
+        return ans;
+    }
+
+    void backtrack(vector<int>& nums, vector<bool>& st) {
+        if (cur.size() == n) {
+            ans.push_back(cur);
+            return;
+        }
+        for (int i = 0; i < nums.size(); i++) {
+            // if (!st[i]) {
+                // st[i] = true;
+                cur.push_back(nums[i]);
+                backtrack(nums, st);
+                cur.pop_back();
+                // st[i] = false;
+            // }
+        }
+    }
+};
+
+int main() {
+    
+    cin >> n;
+    vector<int> nums = {1,2,3};
+    Solution s;
+    s.permute(nums);
+
+    for (auto i : s.ans) {
+        for (int j : i) {
+            cout << j;
+        }
+        cout << ' ';
+    }
+    cout << s.ans.size() << endl;
+}

@@ -1,5 +1,19 @@
 #include <bits/stdc++.h>
 
+/*
+1、输入一个只含有英文字母的字符串，输出最大回文子串的长度及此长度回文子串的个数（回文不区分大小写）。
+样例：
+输入: aBaAb(最大回文子串为BaAb)
+输出: 4 1
+输入: aBcbBb(最大回文子串为Bcb和bBb)
+输出: 3 2
+输入: a B
+输出: 1 2
+输入: aBcBB
+输出: 3 1
+输入: aaaaaa
+输出: 6 1 
+*/
 using namespace std;
 
 int main()

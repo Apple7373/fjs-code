@@ -1,19 +1,40 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+
+int a[1000][1000];
+int n;
 int main()
-{
-	string s;
-	cin >> s;
-	stack<char> st;
-	int m = 0;
-	for (int i = 0; i < s.size(); i++) {
-		if (s[i] == '(') {
-			st.push(s[i]); // 左括号进栈
-			m = max(m, st.size());  // 更新栈的最大 大小
-		}
-		else if (s[i] == ')') st.pop();  // 遇到右括号 栈顶一定是左括号   括号一定是匹配的
-	}
+{    
+    int n;
+    cin >> n;
+    int cnt = 1;
+    // 先填充前n斜线 
+    bool flag = true; // true表示左下到右上  false 表示右上到左下
+    for (int k = 0; k < n; k++) {
+        if (flag) {
+            for (int i = k, j = 0; i >= 0; i--,j++) a[i][j] = cnt++;
+            flag = false;
+        } else {
+            for (int i = 0, j = k; i <= k; i++, j--) a[i][j] = cnt++;
+            flag = true;
+        }
+    }
 
-	cout << m << endl;
+    // 接下来输出下三角
+    for (int k = n; k < 2*n-1; k++) {
+        if (flag) {
+            for (int i = n-1, j = k-i; j <= n-1; i--, j++) a[i][j] = cnt++;
+            flag = false;    
+        } else {
+            for (int j = n-1, i = k-j; i <= n-1; i++, j--) a[i][j] = cnt++;
+            flag = true;
+        }
+    }
 
-	}
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            cout << a[i][j] << '\t';
+        cout << endl;
+    }
+    return 0;
+}
